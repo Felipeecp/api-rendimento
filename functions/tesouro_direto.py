@@ -1,5 +1,5 @@
 import pandas as pd
-# import requests
+import requests
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 # import ssl
@@ -10,7 +10,8 @@ from dateutil.relativedelta import relativedelta
 
 def getTitulos():
     url = "https://www.tesourodireto.com.br/mercado-de-titulos-publicos/rentabilidade-acumulada.htm"
-    tesouro_direto = pd.read_html(url, decimal=",",thousands=".",header=[1], encoding="utf-8")
+    req = requests.get(url, verify=False)
+    tesouro_direto = pd.read_html(req, decimal=",",thousands=".",header=[1], encoding="utf-8")
 
     titulos = tesouro_direto[4]
     titulos = titulos[titulos['Compra'] != '-']
