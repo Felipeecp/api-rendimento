@@ -1,6 +1,11 @@
 import pandas as pd
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
+import ssl
+
+# Configurando ssl para evitar erro de ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+
 
 def getTitulos():
     url = "https://www.tesourodireto.com.br/mercado-de-titulos-publicos/rentabilidade-acumulada.htm"
