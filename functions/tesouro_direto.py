@@ -5,6 +5,10 @@ import requests
 import urllib3
 
 requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = 'ALL:@SECLEVEL=1'
+import ssl
+
+# Configurando ssl para evitar erro de ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 
 def getTitulos():
