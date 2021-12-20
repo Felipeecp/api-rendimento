@@ -1,6 +1,11 @@
 import pandas as pd
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
+import requests
+import urllib3
+
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = 'ALL:@SECLEVEL=1'
+
 
 def getTitulos():
     url = "https://www.tesourodireto.com.br/mercado-de-titulos-publicos/rentabilidade-acumulada.htm"
