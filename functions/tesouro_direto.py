@@ -1,5 +1,4 @@
 import pandas as pd
-# import requests
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 # import ssl
@@ -9,10 +8,10 @@ from dateutil.relativedelta import relativedelta
 
 
 def getTitulos():
-    url = "https://www.tesourodireto.com.br/mercado-de-titulos-publicos/rentabilidade-acumulada.htm"
-    tesouro_direto = pd.read_html(url, decimal=",",thousands=".",header=[1], encoding="utf-8")
+    # url = "https://www.tesourodireto.com.br/mercado-de-titulos-publicos/rentabilidade-acumulada.htm"
+    # tesouro_direto = pd.read_html(url, decimal=",",thousands=".",header=[1], encoding="utf-8")
 
-    titulos = tesouro_direto[4]
+    titulos = pd.read_csv("functions/data/titulos.csv",sep=';')
     titulos = titulos[titulos['Compra'] != '-']
 
     def arrumar(nomeTitulo):
