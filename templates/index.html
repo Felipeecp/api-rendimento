@@ -71,6 +71,7 @@
             credentials: "include",
             body: JSON.stringify(entry),
             cache: "no-cache",
+            dataType: 'json',
             headers: new Headers({
               "content-type": "application/json"
             })
@@ -81,7 +82,7 @@
                 return;
               }
               response.json().then(function (data) {
-                  document.getElementById("iT").textContent= `Investimento total: R$ ${data["total"]}`;
+                  document.getElementById("iT").textContent= `Investimento total: R$ ${data['total']}`;
                   document.getElementById("rB").textContent= `Retorno Bruto: R$ ${data["bruto"]}`;
                   document.getElementById("custo").textContent= `Custo: R$ ${data["b3"]}`;
                   document.getElementById("iR").textContent= `Imposto de Renda: R$ ${data["imposto"]}`;
