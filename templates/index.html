@@ -63,7 +63,7 @@
           };
           console.log(entry)
 
-          fetch("http://127.0.0.1:5000/tesouros", {
+          fetch("https://api-rendimento.herokuapp.com/tesouros", {
             method: "POST",
             credentials: "include",
             body: JSON.stringify(entry),
