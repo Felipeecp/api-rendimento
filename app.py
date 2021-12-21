@@ -4,9 +4,11 @@ import json
 
 
 from flask.templating import render_template
+from flask_cors import CORS, cross_origin
 from functions.tesouro_direto import calcular_tesouro
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/tesouros", methods=["POST"])
 def tesouro():
