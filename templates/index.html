@@ -57,26 +57,20 @@
 
         function submit_message() {
       
-          var aporteInicial = document.getElementById("aporteInicial");
-          var aporteMensal = document.getElementById("aporteMensal");
-      
           var entry = {
             aporteInicial: aporteInicial.value,
             aporteMensal: aporteMensal.value
           };
           console.log(entry)
 
-          let headerss = new Headers();
-
-          headerss.append('Content-Type', 'application/json');
-          headerss.append('Accept', 'application/json');
-
           fetch("http://127.0.0.1:5000/tesouros", {
             method: "POST",
             credentials: "include",
             body: JSON.stringify(entry),
             cache: "no-cache",
-            headers: headerss
+            headers: new Headers({
+              "content-type": "application/json"
+            })
           })
             .then(function (response) {
               if (response.status !== 200) {
