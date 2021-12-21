@@ -68,10 +68,8 @@
 
           fetch("http://127.0.0.1:5000/tesouros", {
             method: "POST",
-            credentials: "include",
             body: JSON.stringify(entry),
             cache: "no-cache",
-            dataType: 'json',
             headers: new Headers({
               "content-type": "application/json"
             })
