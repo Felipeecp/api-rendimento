@@ -2,27 +2,8 @@ import pandas as pd
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
-import requests
-import urllib3
-
-requests.packages.urllib3.disable_warnings()
-requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
-try:
-    requests.packages.urllib3.contrib.pyopenssl.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
-except AttributeError:
-    # no pyopenssl support used / needed / available
-    pass
-
-import ssl
-
-# Configurando ssl para evitar erro de ssl
-# ssl._create_default_https_context = ssl._create_unverified_context
-
-
 def getTitulos():
-    # url = "https://www.tesourodireto.com.br/mercado-de-titulos-publicos/rentabilidade-acumulada.htm"
-    # tesouro_direto = pd.read_html(url, decimal=",",thousands=".",header=[1], encoding="utf-8")
-
+    
     titulos = pd.read_csv("functions/data/titulos.csv",sep=';')
     titulos = titulos[titulos['Compra'] != '-']
 

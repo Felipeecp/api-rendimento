@@ -5,7 +5,7 @@ import json
 
 from flask.templating import render_template
 from flask_cors import CORS, cross_origin
-from functions.tesouro_direto import calcular_tesouro
+from functions.tesouro_direto import calcular_tesouro, getTitulos
 
 app = Flask(__name__)
 CORS(app)
@@ -22,6 +22,15 @@ def tesouro():
         return res
     except:
         return make_response(jsonify({}),500)
+
+
+@app.route("/titulos", methods=['GET'])
+def titulos():
+    titulos = getTitulos()['Título']
+    titulos_json = []
+    for titulo in titulos:
+        titulos_json.append(titulo)
+    return jsonify(titulos_json)
 
 
 @app.route("/")
