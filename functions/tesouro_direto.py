@@ -3,8 +3,8 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
 def getTitulos():
-    
-    titulos = pd.read_csv("functions/data/titulos.csv",sep=';')
+    url = 'https://apiapex.tesouro.gov.br/aria/v1/sistd/custom/ultimaRentabilidadeCSV'
+    titulos = pd.read_csv(url, sep=";", encoding="latin1", decimal=",",thousands=".")
     titulos = titulos[titulos['Compra'] != '-']
 
     def arrumar(nomeTitulo):
