@@ -7,7 +7,7 @@ def getTitulos():
     titulos = pd.read_csv(url, sep=";", encoding="latin1")
     titulos[['Últ. 30 dias','Mêsanterior','No ano','12 meses','Compra','Venda']] = titulos[['Últ. 30 dias','Mêsanterior','No ano','12 meses','Compra','Venda']].apply(lambda x: x.str.replace(',','.'))
 
-    titulos.query("Compra != '-'",inplace=True)
+    titulos.query("Compra != '-'", inplace=True)
     titulos['Vencimento'] = pd.to_datetime(titulos['Vencimento'],format="%d/%m/%Y")
     titulos.reset_index(drop=True,inplace=True)
     for i in range(len(titulos)):
