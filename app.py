@@ -15,7 +15,7 @@ def tesouro():
     try:
         req = request.get_json()
         Investimento = namedtuple('Investimento', ['bruto', 'total', 'imposto', "b3", "liquido"])
-        fundo = calcular_tesouro(float(req["aporteInicial"]), float(req["aporteMensal"]), "TESOURO PREFIXADO 2026")
+        fundo = calcular_tesouro(float(req["aporteInicial"]), float(req["aporteMensal"]), "Tesouro Prefixado 2026")
         investimento = Investimento(fundo[0], fundo[1], fundo[2],
                                     fundo[3], fundo[4])
         res = make_response(jsonify(investimento._asdict()), 200)

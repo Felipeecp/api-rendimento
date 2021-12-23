@@ -16,7 +16,7 @@ def getTitulos():
     return titulos
 
 
-def calcular_tesouro(inicial, aporte_mensal, nome_do_titulo, dataset):
+def calcular_tesouro(inicial, aporte_mensal, nome_do_titulo, dataset=getTitulos()):
     df = dataset[dataset["Títulos"] == nome_do_titulo]
 
     # Pegando a quantidade de meses
