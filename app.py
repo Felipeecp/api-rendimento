@@ -1,10 +1,12 @@
 from collections import namedtuple
 from flask import Flask, request, jsonify, make_response
 import json
+from flask.json import dumps
 
 
 from flask.templating import render_template
 from flask_cors import CORS, cross_origin
+from numpy import invert
 from functions.tesouro_direto import calcular_tesouro, getTitulos
 
 app = Flask(__name__)
@@ -12,13 +14,16 @@ CORS(app)
 
 @app.route("/tesouros", methods=["POST"])
 def tesouro():
+    investimento =  ['bruto', 'total', 'imposto', "b3", "liquido"]
     try:
         req = request.get_json()
-        Investimento = namedtuple('Investimento', ['bruto', 'total', 'imposto', "b3", "liquido"])
-        fundo = calcular_tesouro(float(req["aporteInicial"]), float(req["aporteMensal"]), "Tesouro Prefixado 2026")
-        investimento = Investimento(fundo[0], fundo[1], fundo[2],
-                                    fundo[3], fundo[4])
-        res = make_response(jsonify(investimento._asdict()), 200)
+
+        ap_inicial, ap_mensal = float(req["aporteInicial"]), float(req["aporteMensal"])
+        nome = req["nomeTitulo"]
+
+        fundo = calcular_tesouro(ap_inicial, ap_mensal, nome)
+        res = make_response(jsonify(dict(zip(investimento, fundo))), 200)
+        
         return res
     except:
         return make_response(jsonify({}),500)
@@ -26,11 +31,14 @@ def tesouro():
 
 @app.route("/titulos", methods=['GET'])
 def titulos():
-    titulos = getTitulos()['Título']
-    titulos_json = []
-    for titulo in titulos:
-        titulos_json.append(titulo)
-    return jsonify(titulos_json)
+    try:
+        titulos = getTitulos()['Títulos']
+        titulos_json = []
+        for titulo in titulos:
+            titulos_json.append(titulo)
+        return make_response(jsonify(titulos_json), 200)
+    except:
+        return make_response(jsonify({}),500)
 
 
 @app.route("/")
