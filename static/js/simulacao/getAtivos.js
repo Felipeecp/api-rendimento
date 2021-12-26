@@ -1,5 +1,5 @@
 function getAtivos(){
-    fetch("https://api-rendimento.herokuapp.com/titulos", {
+    fetch("http://127.0.0.1:5000/titulos", {
       method: "GET",
       credentials: "include",
       cache: "no-cache",

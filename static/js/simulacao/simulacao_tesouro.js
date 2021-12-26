@@ -6,7 +6,7 @@ function simularTesouro(vl_Inicial, vl_Mensal, nome) {
     };
     console.log(entry)
 
-    fetch("https://api-rendimento.herokuapp.com/tesouros", {
+    fetch("http://127.0.0.1:5000/tesouros", {
         method: "POST",
         credentials: "include",
         body: JSON.stringify(entry),

@@ -7,7 +7,7 @@ from flask.json import dumps
 from flask.templating import render_template
 from flask_cors import CORS, cross_origin
 from numpy import invert
-from functions.tesouro_direto import calcular_tesouro, getTitulos
+from functions.tesouro_direto import calcular_tesouro, getTitulos, calcular_poupanca
 
 app = Flask(__name__)
 CORS(app)
@@ -28,6 +28,17 @@ def tesouro():
     except:
         return make_response(jsonify({}),500)
 
+@app.route("/poupanca", methods=["GET"])
+def poupanca():
+    ap_inicial = 1000
+    ap_mensal = 50 
+    nome = 'Tesouro Selic 2024'
+    try:
+        fundo = calcular_poupanca(ap_inicial, ap_mensal, nome)
+        return make_response(jsonify(fundo), 200)
+    
+    except:
+        return make_response(jsonify({}),500)
 
 @app.route("/titulos", methods=['GET'])
 def titulos():
@@ -39,7 +50,6 @@ def titulos():
         return make_response(jsonify(titulos_json), 200)
     except:
         return make_response(jsonify({}),500)
-
 
 @app.route("/")
 def index():
